@@ -75,18 +75,13 @@
   }
 
   .Auth {
+    display: flex;
+    gap: 10px;
+
     > button {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 15px;
-      font-size: $font-md;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: $color-white;
-      background-color: $color-nasturcian-flower;
-      border: none;
-      border-radius: 3px;
 
       > span {
         margin-left: 5px;

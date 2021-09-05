@@ -1,6 +1,8 @@
 import { FirebaseApp } from 'firebase/app'
-import { Auth, User } from 'firebase/auth'
+import { Auth } from 'firebase/auth'
 import { Firestore } from 'firebase/firestore'
+
+import { UserInterface } from './user.interface'
 
 export interface StorageInterface {
   firebase: {
@@ -10,6 +12,6 @@ export interface StorageInterface {
   }
   auth: {
     isLogged: boolean
-    userData: User | null
+    userData: UserInterface | null
   }
 }

@@ -1,0 +1,29 @@
+@mixin mainBtn() {
+  padding: 12px 20px;
+  font-size: $font-md;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.orange-btn {
+  @include mainBtn();
+  color: $color-white;
+  background-color: $color-nasturcian-flower;
+
+  &:hover {
+    background-color: $color-harley-davidson-orange;
+  }
+}
+
+.dark-blue-btn {
+  @include mainBtn();
+  color: $color-white;
+  background-color: $color-blueberry-soda;
+
+  &:hover {
+    background-color: $color-chain-gang-grey;
+  }
+}

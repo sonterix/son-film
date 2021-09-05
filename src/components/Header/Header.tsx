@@ -4,20 +4,21 @@ import { PersonIcon, SignInIcon } from '@primer/octicons-react'
 
 import { StorageInterface } from 'types/storage.interface'
 import useStorage from 'hooks/useStorage'
-import { PRIVATE_ROUTES } from 'router/PrivateRoutes'
 import { PUBLIC_ROUTES } from 'router/PublicRoutes'
 import styles from './Header.module.scss'
 
 const Header = (): JSX.Element => {
   // Get data from Context
   const {
-    auth: { isLogged },
+    auth: { isLogged, userData },
     firebase: { auth }
   }: StorageInterface = useStorage()
 
+  const { role } = userData || {}
+
   // Auth user with google popup
   const handleAuth = async (): Promise<void> => {
-    const provider: GoogleAuthProvider = new GoogleAuthProvider()
+    const provider = new GoogleAuthProvider()
     await signInWithPopup(auth, provider)
   }
 
@@ -37,7 +38,7 @@ const Header = (): JSX.Element => {
 
       <nav className={styles.Navigation}>
         <ul>
-          {(isLogged ? PRIVATE_ROUTES : PUBLIC_ROUTES).map(({ id, path, label }) => (
+          {PUBLIC_ROUTES.map(({ id, path, label }) => (
             <li key={id}>
               <NavLink to={path}>{label}</NavLink>
             </li>
@@ -46,7 +47,18 @@ const Header = (): JSX.Element => {
       </nav>
 
       <div className={styles.Auth}>
-        <button type="button" onClick={isLogged ? handleSignOut : handleAuth}>
+        {role === 'admin' && (
+          <button className="dark-blue-btn">
+            <PersonIcon size={18} />
+            <span>Admin Panel</span>
+          </button>
+        )}
+
+        <button
+          type="button"
+          className="orange-btn"
+          onClick={isLogged ? handleSignOut : handleAuth}
+        >
           {isLogged ? (
             <>
               <SignInIcon size={18} />
