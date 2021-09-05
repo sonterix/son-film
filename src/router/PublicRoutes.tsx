@@ -1,14 +1,11 @@
-import { lazy } from 'react'
 import { Route } from 'react-router-dom'
 
-const FilmsList = lazy(() => import('components/FilmsList/FilmsList'))
-
-export const PUBLIC_ROUTES = [{ id: 0, path: '/', label: 'Films', component: FilmsList }]
+import { PUBLIC_ROUTES } from 'router/router.constants'
 
 const PublicRoutes = (): JSX.Element => (
   <>
     {PUBLIC_ROUTES.map(({ id, path, component }) => (
-      <Route key={id} path={path} component={component} exact />
+      <Route key={`public-${id}`} path={path} component={component} exact />
     ))}
   </>
 )

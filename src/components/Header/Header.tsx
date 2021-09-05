@@ -1,13 +1,17 @@
+import { useHistory } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { PersonIcon, SignInIcon } from '@primer/octicons-react'
 
 import { StorageInterface } from 'types/storage.interface'
 import useStorage from 'hooks/useStorage'
-import { PUBLIC_ROUTES } from 'router/PublicRoutes'
+import { PUBLIC_ROUTES } from 'router/router.constants'
+import logo from 'assets/orange-logo.png'
 import styles from './Header.module.scss'
 
 const Header = (): JSX.Element => {
+  const { push } = useHistory()
+
   // Get data from Context
   const {
     auth: { isLogged, userData },
@@ -29,10 +33,7 @@ const Header = (): JSX.Element => {
     <header className={styles.Header}>
       <div className={styles.Logo}>
         <NavLink to="/">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/sonfilm-6f58e.appspot.com/o/images%2Flogos%2Flogo-white.png?alt=media"
-            alt="logo"
-          />
+          <img src={logo} alt="logo" />
         </NavLink>
       </div>
 
@@ -48,7 +49,11 @@ const Header = (): JSX.Element => {
 
       <div className={styles.Auth}>
         {role === 'admin' && (
-          <button className="dark-blue-btn">
+          <button
+            type="button"
+            className="dark-blue-btn"
+            onClick={() => push('/admin-panel/add-film')}
+          >
             <PersonIcon size={18} />
             <span>Admin Panel</span>
           </button>

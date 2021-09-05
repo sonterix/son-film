@@ -1,16 +1,32 @@
-// import { lazy } from 'react'
-import { Route } from 'react-router-dom'
+import { createElement } from 'react'
+import { Route, Redirect } from 'react-router-dom'
 
-// const FilmsList = lazy(() => import('components/FilmsList/FilmsList'))
+import { StorageInterface } from 'types/storage.interface'
+import useStorage from 'hooks/useStorage'
+import { ADMIN_ROUTES } from 'router/router.constants'
 
-export const ADMIN_ROUTES = []
+const AdminRoutes = (): JSX.Element | null => {
+  // Get data from Context
+  const {
+    auth: { isAuthChecked, userData }
+  }: StorageInterface = useStorage()
 
-const AdminRoutes = (): JSX.Element => (
-  <>
-    {ADMIN_ROUTES.map(({ id, path, component }) => (
-      <Route key={id} path={path} component={component} exact />
-    ))}
-  </>
-)
+  const { role } = userData || {}
+
+  return isAuthChecked ? (
+    <>
+      {ADMIN_ROUTES.map(({ id, path, component }) => (
+        <Route
+          key={`admin-${id}`}
+          path={path}
+          render={props =>
+            role === 'admin' ? createElement(component, props) : <Redirect to="/" />
+          }
+          exact
+        />
+      ))}
+    </>
+  ) : null
+}
 
 export default AdminRoutes

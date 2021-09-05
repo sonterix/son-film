@@ -4,16 +4,37 @@
   font-weight: 600;
   text-transform: uppercase;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: background-color 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 }
 
+// Container
+.container {
+  margin: 0 auto;
+  padding: 30px 15px;
+  max-width: 1430px;
+  width: 100%;
+}
+
+.container-small {
+  margin: 0 auto;
+  padding: 30px 15px;
+  max-width: 630px;
+  width: 100%;
+}
+
+// Buttons
 .orange-btn {
   @include mainBtn();
   color: $color-white;
   background-color: $color-nasturcian-flower;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: $color-harley-davidson-orange;
   }
 }
@@ -23,7 +44,7 @@
   color: $color-white;
   background-color: $color-blueberry-soda;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: $color-chain-gang-grey;
   }
 }

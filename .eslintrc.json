@@ -22,8 +22,8 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/button-has-type": "off",
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": [
       "error",

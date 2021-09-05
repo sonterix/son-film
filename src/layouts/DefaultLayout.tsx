@@ -2,7 +2,7 @@ import { useState, createContext, useEffect, useCallback } from 'react'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 
-import { app, database, auth } from 'firebase/init'
+import { app, database, auth, storage } from 'firebase/init'
 import { StorageInterface } from 'types/storage.interface'
 import { BaseUserInterface, UserInterface } from 'types/user.interface'
 import Header from 'components/Header/Header'
@@ -13,14 +13,15 @@ type DefaultLayoutType = {
 
 // Default Context data
 const defaultValue: StorageInterface = {
-  firebase: { app, database, auth },
-  auth: { isLogged: false, userData: null }
+  firebase: { app, database, auth, storage },
+  auth: { isAuthChecked: false, isLogged: false, userData: null }
 }
 
 // Context as one scource of truth
 export const Context: React.Context<StorageInterface> = createContext(defaultValue)
 
 const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
+  const [isAuthChecked, setAuthChecked] = useState<boolean>(false)
   const [user, setUser] = useState<UserInterface | null>(null)
 
   // Get user from firebase; create user if not exist; return user object
@@ -74,7 +75,12 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
           ...otherUserData
         }
         setUser(userObject)
-      } else setUser(null) // Log out user
+        setAuthChecked(true)
+      } else {
+        // Log out user
+        setUser(null)
+        setAuthChecked(true)
+      }
     })
   }, [])
 
@@ -83,6 +89,7 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
       value={{
         ...defaultValue,
         auth: {
+          isAuthChecked,
           isLogged: !!user,
           userData: user
         }
