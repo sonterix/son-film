@@ -39,11 +39,15 @@ const Header = (): JSX.Element => {
 
       <nav className={styles.Navigation}>
         <ul>
-          {PUBLIC_ROUTES.map(({ id, path, label }) => (
-            <li key={id}>
-              <NavLink to={path}>{label}</NavLink>
-            </li>
-          ))}
+          {PUBLIC_ROUTES.map(({ id, path, label }) =>
+            label ? (
+              <li key={id}>
+                <NavLink to={path}>{label}</NavLink>
+              </li>
+            ) : (
+              ''
+            )
+          )}
         </ul>
       </nav>
 
@@ -55,7 +59,7 @@ const Header = (): JSX.Element => {
             onClick={() => push('/admin-panel/add-film')}
           >
             <PersonIcon size={18} />
-            <span>Admin Panel</span>
+            <span>Панель</span>
           </button>
         )}
 
@@ -67,12 +71,12 @@ const Header = (): JSX.Element => {
           {isLogged ? (
             <>
               <SignInIcon size={18} />
-              <span>Out</span>
+              <span>Выйти</span>
             </>
           ) : (
             <>
               <PersonIcon size={18} />
-              <span>Auth</span>
+              <span>Войти</span>
             </>
           )}
         </button>

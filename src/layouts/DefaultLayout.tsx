@@ -23,6 +23,7 @@ const defaultValue: StorageInterface = {
 export const Context: React.Context<StorageInterface> = createContext(defaultValue)
 
 const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
+  const [isContentLoaded, setContentLoaded] = useState<boolean>(false)
   const [isAuthChecked, setAuthChecked] = useState<boolean>(false)
   const [user, setUser] = useState<UserInterface | null>(null)
 
@@ -63,8 +64,8 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
     }
   }, [])
 
-  // Auth manager
   useEffect(() => {
+    // Auth manager
     onAuthStateChanged(auth, async (authUser: User | null): Promise<void> => {
       if (authUser) {
         // Get user data
@@ -86,10 +87,8 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
         setAuthChecked(true)
       }
     })
-  }, [])
 
-  // Get all films
-  useEffect(() => {
+    // Get all films
     ;(async () => {
       const filmsDB = await getDocs(collection(database, 'films'))
       // Fill array with films objects
@@ -98,6 +97,7 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
       filmsDB.forEach(filmDB => allFilms.push(filmDB.data()))
 
       setFilms(allFilms)
+      setContentLoaded(true)
     })()
   }, [])
 
@@ -115,7 +115,7 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
     >
       <Header />
 
-      <main>{children}</main>
+      <main>{isContentLoaded && children}</main>
     </Context.Provider>
   )
 }

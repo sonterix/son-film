@@ -92,7 +92,7 @@ const AddOrEditFilm = (): JSX.Element => {
 
   return (
     <section className={`container-small ${styles.AddOrEditFilm}`}>
-      <h3 className={styles.PageTitle}>Add New Film</h3>
+      <h3 className={styles.PageTitle}>Добавить Фильм</h3>
 
       <Formik
         initialValues={initialValues}
@@ -125,7 +125,7 @@ const AddOrEditFilm = (): JSX.Element => {
                         handleUploadImage(files?.length ? files[0] : null, setFieldValue)
                       }
                     />
-                    <span>Select Image</span>
+                    <span>Постер фильма</span>
                   </label>
                 )}
               </div>
@@ -138,13 +138,13 @@ const AddOrEditFilm = (): JSX.Element => {
                 </div>
 
                 <div className={styles.InputBox}>
-                  <label htmlFor="nameField">Name</label>
+                  <label htmlFor="nameField">Название</label>
                   <Field id="nameField" name="name" placeholder="Неприкасаемые" />
                   <ErrorMessage name="name" component="span" />
                 </div>
 
                 <div className={styles.InputBox}>
-                  <label htmlFor="originalNameField">Original Name</label>
+                  <label htmlFor="originalNameField">Оригинальное название</label>
                   <Field id="originalNameField" name="originalName" placeholder="Intouchables" />
                   <ErrorMessage name="originalName" component="span" />
                 </div>
@@ -152,7 +152,7 @@ const AddOrEditFilm = (): JSX.Element => {
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="descriptionField">Description</label>
+              <label htmlFor="descriptionField">Описание</label>
               <Field
                 id="descriptionField"
                 name="description"
@@ -164,49 +164,49 @@ const AddOrEditFilm = (): JSX.Element => {
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="typeField">Type</label>
+              <label htmlFor="typeField">Тип</label>
               <Field id="typeField" name="type" placeholder="Кино" />
               <ErrorMessage name="type" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="ratingIMDbField">IMDb Rating</label>
+              <label htmlFor="ratingIMDbField">IMDb рейтинг</label>
               <Field type="number" id="ratingIMDbField" name="ratingIMDb" placeholder="8.5" />
               <ErrorMessage name="ratingIMDb" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="statusField">Status</label>
+              <label htmlFor="statusField">Статус</label>
               <Field id="statusField" name="status" placeholder="Снимается" />
               <ErrorMessage name="status" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="yearField">Year</label>
+              <label htmlFor="yearField">Год выпуска</label>
               <Field type="number" id="yearField" name="year" placeholder="2011" />
               <ErrorMessage name="year" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="countryField">Country</label>
+              <label htmlFor="countryField">Страна выпуска</label>
               <Field id="countryField" name="country" placeholder="Франция" />
               <ErrorMessage name="country" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="genreField">Genre</label>
+              <label htmlFor="genreField">Жарн(ы)</label>
               <Field id="genreField" name="genre" placeholder="биография, драма, комедия" />
               <ErrorMessage name="genre" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="directorField">Director</label>
+              <label htmlFor="directorField">Режиссер(ы)</label>
               <Field id="directorField" name="director" placeholder="Оливье Накаш, Эрик Толедано" />
               <ErrorMessage name="director" component="span" />
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="actorsField">Actors</label>
+              <label htmlFor="actorsField">Актёры</label>
               <Field
                 id="actorsField"
                 name="actors"
@@ -216,7 +216,7 @@ const AddOrEditFilm = (): JSX.Element => {
             </div>
 
             <div className={styles.InputBox}>
-              <label htmlFor="iframeUrlField">Film Iframe URL</label>
+              <label htmlFor="iframeUrlField">Iframe URL</label>
               <Field
                 id="iframeUrlField"
                 name="iframeUrl"
@@ -230,7 +230,7 @@ const AddOrEditFilm = (): JSX.Element => {
               className={`orange-btn ${styles.AddBtn}`}
               disabled={isSubmitting || !!Object.values(errors).length}
             >
-              Add Film
+              Добавить Фильм
             </button>
           </Form>
         )}

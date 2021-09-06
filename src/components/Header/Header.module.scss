@@ -35,11 +35,16 @@
       > li {
         height: inherit;
 
+        &:last-child > a {
+          margin-right: 0;
+        }
+
         > a {
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
+          margin-right: 30px;
           height: inherit;
           color: $color-white;
           font-size: $font-md + 2;
