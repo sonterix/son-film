@@ -7,6 +7,7 @@ import { StorageInterface } from 'types/storage.interface'
 import { FilmInterface } from 'types/films.interface'
 import { BaseUserInterface, UserInterface } from 'types/user.interface'
 import Header from 'components/Header/Header'
+import Loader from 'components/Loader/Loader'
 
 type DefaultLayoutType = {
   children: React.ReactNode
@@ -115,7 +116,7 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
     >
       <Header />
 
-      <main>{isContentLoaded && children}</main>
+      <main>{isContentLoaded ? children : <Loader height="100vh" />}</main>
     </Context.Provider>
   )
 }

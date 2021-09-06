@@ -5,11 +5,12 @@ import DefaultLayout from 'layouts/DefaultLayout'
 import AdminRoutes from 'router/AdminRoutes'
 import UserRoutes from 'router/UserRoutes'
 import PublicRoutes from 'router/PublicRoutes'
+import Loader from 'components/Loader/Loader'
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
     <DefaultLayout>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader height="100vh" />}>
         <PublicRoutes />
         <AdminRoutes />
         <UserRoutes />

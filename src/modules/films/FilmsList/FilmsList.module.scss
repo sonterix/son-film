@@ -1,12 +1,27 @@
+@import '../../../scss/variables';
+
 .FilmsList {
   display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 40px;
+  grid-template-columns: 1fr;
+  row-gap: 40px;
 
   .List {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     column-gap: 20px;
     row-gap: 20px;
+
+    @media (min-width: $sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: $md) {
+    grid-template-columns: 1fr auto;
+    column-gap: 40px;
   }
 }

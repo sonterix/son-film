@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'router/router.constants'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { FilmInterface } from 'types/films.interface'
 import styles from './FilmCard.module.scss'
@@ -13,7 +14,7 @@ const FilmCard = ({
 }: FilmCardProps): JSX.Element => (
   <Link to={`${ROUTES.film}${slug}`} className={styles.FilmCard}>
     <div className={styles.Image}>
-      <img src={filmImg} alt="film poster" />
+      <LazyLoadImage src={filmImg} alt="film poster" effect="blur" />
     </div>
 
     <div className={styles.Rating}>

@@ -2,6 +2,7 @@ import { useHistory } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { PersonIcon, SignInIcon } from '@primer/octicons-react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { StorageInterface } from 'types/storage.interface'
 import useStorage from 'hooks/useStorage'
@@ -33,7 +34,7 @@ const Header = (): JSX.Element => {
     <header className={styles.Header}>
       <div className={styles.Logo}>
         <NavLink to="/">
-          <img src={logo} alt="logo" />
+          <LazyLoadImage src={logo} alt="logo" effect="blur" width={150} height={48} />
         </NavLink>
       </div>
 

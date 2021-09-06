@@ -5,11 +5,13 @@
   grid-template-columns: auto 1fr auto;
   column-gap: 30px;
   align-items: center;
+  position: relative;
   padding: 0 15px;
   width: 100%;
   min-height: 65px;
   background-color: $color-electromagnetic;
   box-shadow: 0px 2px 3px 0px rgba($color-black, 0.3);
+  z-index: 99999999;
 
   .Logo {
     margin-right: 50px;
@@ -21,6 +23,7 @@
   }
 
   .Navigation {
+    display: none;
     height: 100%;
 
     > ul {
@@ -77,10 +80,14 @@
         }
       }
     }
+
+    @media (min-width: $md) {
+      display: block;
+    }
   }
 
   .Auth {
-    display: flex;
+    display: none;
     gap: 10px;
 
     > button {
@@ -91,6 +98,10 @@
       > span {
         margin-left: 5px;
       }
+    }
+
+    @media (min-width: $md) {
+      display: flex;
     }
   }
 }

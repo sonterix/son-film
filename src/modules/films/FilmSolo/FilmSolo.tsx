@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { Redirect, RouteComponentProps } from 'react-router'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { FilmInterface } from 'types/films.interface'
 import { ROUTES } from 'router/router.constants'
@@ -29,7 +30,13 @@ const FilmSolo = ({
 
       <div className={styles.MainInfo}>
         <div className={styles.LeftSide}>
-          <img src={film.filmImg} alt="film poster" />
+          <LazyLoadImage
+            src={film.filmImg}
+            alt="film poster"
+            effect="blur"
+            width={300}
+            height={445}
+          />
         </div>
 
         <div className={styles.RightSide}>

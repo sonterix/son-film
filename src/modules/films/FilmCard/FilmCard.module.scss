@@ -1,7 +1,9 @@
 @import '../../../scss/variables';
 
 .FilmCard {
+  display: block;
   position: relative;
+  margin: 0 auto;
   max-width: 280px;
   width: 100%;
   text-decoration: none;
@@ -16,11 +18,10 @@
   }
 
   .Image {
-    max-height: 400px;
-
-    > img {
+    img {
+      max-width: 280px;
       width: 100%;
-      max-height: inherit;
+      height: 415px;
       object-fit: cover;
     }
   }
