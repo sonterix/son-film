@@ -1,3 +1,12 @@
 .FilmsList {
-  
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 40px;
+
+  .List {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+  }
 }

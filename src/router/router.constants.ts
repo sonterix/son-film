@@ -6,6 +6,7 @@ const AddOrEditFilm = lazy(() => import('modules/adminPanel/AddOrEditFilm/AddOrE
 
 const ROUTES = {
   films: '/films',
+  film: '/film/',
   addFilm: '/add-film',
   editFilm: '/edit-film'
 }

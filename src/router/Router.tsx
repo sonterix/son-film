@@ -1,20 +1,18 @@
 import { Suspense } from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import DefaultLayout from 'layouts/DefaultLayout'
-import AdminRoutes from './AdminRoutes'
-import UserRoutes from './UserRoutes'
-import PublicRoutes from './PublicRoutes'
+import AdminRoutes from 'router/AdminRoutes'
+import UserRoutes from 'router/UserRoutes'
+import PublicRoutes from 'router/PublicRoutes'
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
     <DefaultLayout>
       <Suspense fallback="Loading...">
-        <Switch>
-          <AdminRoutes />
-          <UserRoutes />
-          <PublicRoutes />
-        </Switch>
+        <PublicRoutes />
+        <AdminRoutes />
+        <UserRoutes />
       </Suspense>
     </DefaultLayout>
   </BrowserRouter>

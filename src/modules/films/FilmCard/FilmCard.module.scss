@@ -1,0 +1,86 @@
+@import '../../../scss/variables';
+
+.FilmCard {
+  position: relative;
+  max-width: 280px;
+  width: 100%;
+  text-decoration: none;
+  box-shadow: $card-shadow;
+
+  &:hover {
+    box-shadow: $card-shadow-hover;
+
+    .Floating {
+      opacity: 1;
+    }
+  }
+
+  .Image {
+    max-height: 400px;
+
+    > img {
+      width: 100%;
+      max-height: inherit;
+      object-fit: cover;
+    }
+  }
+
+  .Rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba($color-black, 0.9);
+
+    > span {
+      font-family: $font-heading;
+      font-size: $font-md;
+      color: $color-white;
+
+      &:last-child {
+        color: $color-nasturcian-flower;
+      }
+    }
+  }
+
+  .Floating {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+    padding-top: 70px;
+    width: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba($color-black, 0.95) 40%,
+      rgba($color-black, 0.8) 60%,
+      rgba($color-black, 0.4) 80%,
+      rgba($color-black, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    .Name {
+      margin-bottom: 10px;
+      font-family: $font-heading;
+      font-size: $font-lg + 4;
+      font-weight: 600;
+      color: $color-white;
+    }
+
+    .Year {
+      margin-bottom: 10px;
+      font-size: $font-sm;
+      font-weight: 500;
+      color: rgba($color-nasturcian-flower, 0.8);
+    }
+
+    .Genre {
+      font-size: $font-xs;
+      font-weight: 500;
+
+      color: rgba($color-white, 0.8);
+    }
+  }
+}

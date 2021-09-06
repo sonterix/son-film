@@ -1,0 +1,15 @@
+@import '../../../scss/variables';
+
+.FilmsFilter {
+  padding: 15px;
+  background-color: $color-electromagnetic;
+
+  .Name {
+    margin-bottom: 20px;
+    font-family: $font-heading;
+    font-size: $font-lg + 20;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-white;
+  }
+}

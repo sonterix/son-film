@@ -89,9 +89,21 @@
         color: $color-white;
       }
 
-      > input {
+      > input,
+      > textarea {
         padding: 15px;
         width: 100%;
+      }
+
+      > textarea {
+        resize: vertical;
+      }
+
+      > span {
+        display: block;
+        margin-top: 5px;
+        font-size: $font-xs;
+        color: $color-nasturcian-flower;
       }
     }
 

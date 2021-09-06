@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
 import { StorageInterface } from 'types/storage.interface'
 import useStorage from 'hooks/useStorage'
@@ -14,7 +14,7 @@ const AdminRoutes = (): JSX.Element | null => {
   const { role } = userData || {}
 
   return isAuthChecked ? (
-    <>
+    <Switch>
       {ADMIN_ROUTES.map(({ id, path, component }) => (
         <Route
           key={`admin-${id}`}
@@ -25,7 +25,7 @@ const AdminRoutes = (): JSX.Element | null => {
           exact
         />
       ))}
-    </>
+    </Switch>
   ) : null
 }
 

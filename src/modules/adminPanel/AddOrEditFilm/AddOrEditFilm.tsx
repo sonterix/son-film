@@ -7,22 +7,8 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import { XIcon } from '@primer/octicons-react'
 
 import useStorage from 'hooks/useStorage'
+import { FilmInterface } from 'types/films.interface'
 import styles from './AddOrEditFilm.module.scss'
-
-type FormValuesType = {
-  filmImg: string
-  name: string
-  originalName: string
-  ratingIMDb: string
-  description: string
-  status: string
-  year: string
-  country: string
-  genre: string
-  director: string
-  actors: string
-  iframeUrl: string
-}
 
 const AddOrEditFilm = (): JSX.Element => {
   // Get storage from context
@@ -34,12 +20,16 @@ const AddOrEditFilm = (): JSX.Element => {
 
   const validation = object({
     filmImg: string().required('Required field'),
+    slug: string()
+      .matches(/^[a-z+-]+/g, 'Enter string in forms one-two-three')
+      .required('Required field'),
     name: string().required('Required field'),
     originalName: string().required('Required field'),
     ratingIMDb: string()
       .matches(/^([0-9]\.[0-9])$/g, 'Enter rating in format 0.0')
       .required('Required field'),
     description: string().required('Required field'),
+    type: string().required('Required field'),
     status: string().required('Required field'),
     year: string()
       .matches(/(19[0-9][0-9]|20[0-2][0-9])/g, 'Enter valide year')
@@ -51,12 +41,15 @@ const AddOrEditFilm = (): JSX.Element => {
     iframeUrl: string().required('Required field')
   })
 
-  const initialValues: FormValuesType = {
+  const initialValues: FilmInterface = {
+    uid: '',
     filmImg: '',
+    slug: '',
     name: '',
     originalName: '',
     ratingIMDb: '',
     description: '',
+    type: '',
     status: '',
     year: '',
     country: '',
@@ -82,12 +75,13 @@ const AddOrEditFilm = (): JSX.Element => {
   }
 
   const handleSubmitForm = async (
-    values: FormValuesType,
-    { resetForm }: FormikHelpers<FormValuesType>
+    values: FilmInterface,
+    { resetForm }: FormikHelpers<FilmInterface>
   ): Promise<void> => {
     try {
+      const filmId = uuid()
       // Save film data in firebase
-      await setDoc(doc(database, 'films', uuid()), values)
+      await setDoc(doc(database, 'films', filmId), { ...values, uid: filmId })
       // Reset form and redirect
       resetForm()
       push('/')
@@ -138,6 +132,12 @@ const AddOrEditFilm = (): JSX.Element => {
 
               <div className={styles.RightSide}>
                 <div className={styles.InputBox}>
+                  <label htmlFor="slugField">Slug</label>
+                  <Field id="slugField" name="slug" placeholder="intouchables" />
+                  <ErrorMessage name="slug" component="span" />
+                </div>
+
+                <div className={styles.InputBox}>
                   <label htmlFor="nameField">Name</label>
                   <Field id="nameField" name="name" placeholder="Неприкасаемые" />
                   <ErrorMessage name="name" component="span" />
@@ -148,12 +148,6 @@ const AddOrEditFilm = (): JSX.Element => {
                   <Field id="originalNameField" name="originalName" placeholder="Intouchables" />
                   <ErrorMessage name="originalName" component="span" />
                 </div>
-
-                <div className={styles.InputBox}>
-                  <label htmlFor="ratingIMDbField">IMDb Rating</label>
-                  <Field type="number" id="ratingIMDbField" name="ratingIMDb" placeholder="8.5" />
-                  <ErrorMessage name="ratingIMDb" component="span" />
-                </div>
               </div>
             </div>
 
@@ -163,8 +157,22 @@ const AddOrEditFilm = (): JSX.Element => {
                 id="descriptionField"
                 name="description"
                 placeholder="В кино драме 'Неприкасаемые' как-то раз проходил отбор на лучшую сиделку..."
+                component="textarea"
+                rows="4"
               />
               <ErrorMessage name="description" component="span" />
+            </div>
+
+            <div className={styles.InputBox}>
+              <label htmlFor="typeField">Type</label>
+              <Field id="typeField" name="type" placeholder="Кино" />
+              <ErrorMessage name="type" component="span" />
+            </div>
+
+            <div className={styles.InputBox}>
+              <label htmlFor="ratingIMDbField">IMDb Rating</label>
+              <Field type="number" id="ratingIMDbField" name="ratingIMDb" placeholder="8.5" />
+              <ErrorMessage name="ratingIMDb" component="span" />
             </div>
 
             <div className={styles.InputBox}>

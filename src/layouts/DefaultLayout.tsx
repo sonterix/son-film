@@ -1,9 +1,10 @@
 import { useState, createContext, useEffect, useCallback } from 'react'
 import { onAuthStateChanged, User } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, setDoc, getDocs } from 'firebase/firestore'
 
 import { app, database, auth, storage } from 'firebase/init'
 import { StorageInterface } from 'types/storage.interface'
+import { FilmInterface } from 'types/films.interface'
 import { BaseUserInterface, UserInterface } from 'types/user.interface'
 import Header from 'components/Header/Header'
 
@@ -14,7 +15,8 @@ type DefaultLayoutType = {
 // Default Context data
 const defaultValue: StorageInterface = {
   firebase: { app, database, auth, storage },
-  auth: { isAuthChecked: false, isLogged: false, userData: null }
+  auth: { isAuthChecked: false, isLogged: false, userData: null },
+  films: []
 }
 
 // Context as one scource of truth
@@ -23,6 +25,8 @@ export const Context: React.Context<StorageInterface> = createContext(defaultVal
 const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
   const [isAuthChecked, setAuthChecked] = useState<boolean>(false)
   const [user, setUser] = useState<UserInterface | null>(null)
+
+  const [films, setFilms] = useState<Array<FilmInterface> | null>(null)
 
   // Get user from firebase; create user if not exist; return user object
   const handleGetUser = useCallback(async (authUser: User): Promise<BaseUserInterface> => {
@@ -84,6 +88,19 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
     })
   }, [])
 
+  // Get all films
+  useEffect(() => {
+    ;(async () => {
+      const filmsDB = await getDocs(collection(database, 'films'))
+      // Fill array with films objects
+      const allFilms: Array<FilmInterface> = []
+      // @ts-ignore
+      filmsDB.forEach(filmDB => allFilms.push(filmDB.data()))
+
+      setFilms(allFilms)
+    })()
+  }, [])
+
   return (
     <Context.Provider
       value={{
@@ -92,7 +109,8 @@ const DefaultLayout = ({ children }: DefaultLayoutType): JSX.Element => {
           isAuthChecked,
           isLogged: !!user,
           userData: user
-        }
+        },
+        films: films || []
       }}
     >
       <Header />
